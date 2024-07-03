@@ -9,6 +9,8 @@ import {
 
 import PropTypes from 'prop-types';
 
+import { motion } from 'framer-motion';
+
 
 const SingleUser = ({ user, index, updatePrivilege }) => {
 
@@ -17,9 +19,13 @@ const SingleUser = ({ user, index, updatePrivilege }) => {
     updatePrivilege(index, newPrivilege);
   };
 
+  const item = {  
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 , transition:{type: "spring" , duration:.5}},
+  }
 
   return (
-    <div className='horizontal justify-between w-full gap-2'>
+    <motion.div className='horizontal justify-between w-full gap-2' variants={item}>
             <div className=' w-[2.778rem] aspect-square  shrink-0 relative flex items-end justify-center '>
             <div className='w-full h-full rounded-full  overflow-hidden flex justify-center items-center' style={{backgroundColor:user.bg}}>
                 <img src={"./images/" + user.photo} alt="" className='w-[2.778rem] -mb-[1px]' />
@@ -44,7 +50,7 @@ const SingleUser = ({ user, index, updatePrivilege }) => {
 
             <DropdownMenu>
               <DropdownMenuTrigger className='shrink-0 focus:outline-none'  >
-                  <button className='shrink-0 text-[0.833rem] capitalize font-medium px-[0.833rem] py-[0.417rem] bg-[#F3F4F6] hover:bg-black/[.06] horizontal rounded-[0.695rem] horizontal gap-2 focus:outline-none'>
+                  <button  className='shrink-0 text-[0.833rem] capitalize font-medium px-[0.833rem] py-[0.417rem] bg-[#F3F4F6] hover:bg-black/[.06] horizontal rounded-[0.695rem] horizontal gap-2 focus:outline-none'>
                     <span>{user.privilege}</span>
                     <Icon icon="solar:alt-arrow-down-linear" />
                   </button>
@@ -57,7 +63,7 @@ const SingleUser = ({ user, index, updatePrivilege }) => {
                 <DropdownMenuItem onClick={() => handlePrivilegeChange('Remove')} className="horizontal gap-2 text-red-600 hover:bg-gradient-to-b from-red-500 to-red-700 hover:!text-white text-[.85rem]"><Icon icon="mdi:trash-can-empty" className='text-lg ' /><span>Remove</span></DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-    </div>
+    </motion.div>
   )
 }
 
